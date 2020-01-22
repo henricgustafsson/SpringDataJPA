@@ -2,6 +2,8 @@ package se.lexicon.henric.SpringDataJPA.entity;
 
 public class AppUser {
 
+	//**************Fields ****************************************************/
+	
 	static int _COUNTER =0;
 	int id;
 	String firstName;
@@ -9,10 +11,13 @@ public class AppUser {
 	String email;
 	
 	
-	
-	
-	/**************Getters & Setters ****************************************************/
-	
+		
+	/**
+	 * Constructor
+	 * @param String firstName
+	 * @param String lasttName
+	 *  @param String email
+	 * */
 	
 	public AppUser(String firstName, String lastName, String email) {
 		if (firstName != null && lastName !=null & email !=null) {
@@ -26,6 +31,8 @@ public class AppUser {
 		}
 	}
 
+	
+	/**************Getters & Setters ****************************************************/
 
 	/**Getter for field String firstName
 	 * @Return String firstName
