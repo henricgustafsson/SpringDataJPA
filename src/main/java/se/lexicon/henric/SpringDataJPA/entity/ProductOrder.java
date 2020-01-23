@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 
@@ -42,6 +43,7 @@ public class ProductOrder {
 						},
 				orphanRemoval = true
 			)
+	@JoinColumn(name="order_item_id")
 	private List<OrderItem> orderItems;	
 	//@ManyToOne relationship with AppUser
 	@OneToMany(
@@ -53,6 +55,7 @@ public class ProductOrder {
 						CascadeType.REFRESH
 					}			
 		)
+	@JoinColumn(name="user_id")
 	private AppUser customer;
 		
 	

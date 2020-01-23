@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -22,6 +23,7 @@ public class OrderItem {
 							CascadeType.REFRESH
 						}			
 			)
+	@JoinColumn(name="product_id")
 	private Product product;	
 	@ManyToOne(
 			fetch = FetchType.LAZY,
