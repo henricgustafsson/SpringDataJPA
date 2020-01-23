@@ -13,7 +13,7 @@ public class AppUser {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int UserId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -33,7 +33,7 @@ public class AppUser {
 			setFirstname(firstName);
 			setLastname(lastName);
 			setEmail(email);
-			this.id = id;
+			this.UserId = id;
 		} 
 		else {
 		throw new IllegalArgumentException("Parameters can't be null");
@@ -110,7 +110,7 @@ public class AppUser {
 	 * @Return int id
 	 * */
 	public int getId() {
-		return id;
+		return UserId;
 	}
 
 	
@@ -131,7 +131,7 @@ public class AppUser {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
+		result = prime * result + UserId;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		return result;
 	}
@@ -162,7 +162,7 @@ public class AppUser {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (id != other.id)
+		if (UserId != other.UserId)
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
