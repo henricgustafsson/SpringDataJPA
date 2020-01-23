@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 public class OrderItem {
 
 	//**************Fields ****************************************************/
-	private int id;
+	private int orderItemId;
 	private int quantity;
 	//OrderItem has an eager @ManyToOne relationship with Product
 	@ManyToOne(
@@ -49,7 +49,7 @@ public class OrderItem {
 			setQuantity(quantity);
 			setProduct(product);
 			setProductOrder(productOrder);
-			this.id =id;
+			this.orderItemId =id;
 		} 
 		else {
 		throw new IllegalArgumentException("Parameters can't be null");
@@ -135,7 +135,7 @@ public class OrderItem {
 	 * @Return int id
 	 * */
 	public int getId() {
-		return id;
+		return orderItemId;
 	}
 
 	
@@ -156,7 +156,7 @@ public class OrderItem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + orderItemId;
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((productOrder == null) ? 0 : productOrder.hashCode());
 		result = prime * result + quantity;
@@ -180,7 +180,7 @@ public class OrderItem {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderItem other = (OrderItem) obj;
-		if (id != other.id)
+		if (orderItemId != other.orderItemId)
 			return false;
 		if (product == null) {
 			if (other.product != null)

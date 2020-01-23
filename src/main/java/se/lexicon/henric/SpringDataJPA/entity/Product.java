@@ -6,8 +6,8 @@ public class Product {
 
 	//************** Fields ****************************************************/
 	
-	//private static int _COUNTER =0;
-	private int id;
+	
+	private int productId;
 	private String name;
 	private BigDecimal price;
 	
@@ -23,7 +23,7 @@ public class Product {
 		if (name !=null && price != BigDecimal.ZERO && price != null) {
 			setName(name);
 			setPrice(price);
-			this.id =id;
+			this.productId =id;
 		} 
 		else {
 		throw new IllegalArgumentException("Parameters can't be null");
@@ -83,7 +83,7 @@ public class Product {
 	 * @Return String name
 	 * */
 	public int getId() {
-		return id;
+		return productId;
 	}
 
 	/**************Equals & hashcode ****************************************************/
@@ -98,7 +98,7 @@ public class Product {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + productId;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		return result;
@@ -121,7 +121,7 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (id != other.id)
+		if (productId != other.productId)
 			return false;
 		if (name == null) {
 			if (other.name != null)

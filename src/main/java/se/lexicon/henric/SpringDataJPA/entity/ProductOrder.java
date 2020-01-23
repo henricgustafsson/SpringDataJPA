@@ -25,7 +25,7 @@ public class ProductOrder {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int productOrderId;
 	private LocalDate OrderDateTime;
 	
 	/*ProductOrder has a @OneToMany relationship with OrderItem. 
@@ -43,6 +43,16 @@ public class ProductOrder {
 				orphanRemoval = true
 			)
 	private List<OrderItem> orderItems;	
+	//@ManyToOne relationship with AppUser
+	@OneToMany(
+			fetch = FetchType.LAZY,
+			cascade= {
+						CascadeType.PERSIST,
+						CascadeType.MERGE,
+						CascadeType.DETACH,
+						CascadeType.REFRESH
+					}			
+		)
 	private AppUser customer;
 		
 	
@@ -65,7 +75,7 @@ public class ProductOrder {
 				//Set each orderItems productOrder to this instance of productOrder				
 				orderItems.forEach(orderItem->orderItem.setProductOrder(this));
 				this.customer = customer;
-				this.id =id;
+				this.productOrderId =id;
 					
 			}
 			else {
@@ -210,7 +220,7 @@ public class ProductOrder {
 		 * @Return int id
 		 * */
 		public int getId() {
-			return id;
+			return productOrderId;
 		}
 
 		
@@ -234,7 +244,7 @@ public class ProductOrder {
 			int result = 1;
 			result = prime * result + ((OrderDateTime == null) ? 0 : OrderDateTime.hashCode());
 			result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-			result = prime * result + id;
+			result = prime * result + productOrderId;
 			result = prime * result + ((orderItems == null) ? 0 : orderItems.hashCode());
 			return result;
 		}
@@ -266,7 +276,7 @@ public class ProductOrder {
 					return false;
 			} else if (!customer.equals(other.customer))
 				return false;
-			if (id != other.id)
+			if (productOrderId != other.productOrderId)
 				return false;
 			if (orderItems == null) {
 				if (other.orderItems != null)
