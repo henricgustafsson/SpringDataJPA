@@ -1,6 +1,7 @@
 package se.lexicon.henric.SpringDataJPA.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductOrder {
@@ -14,9 +15,7 @@ public class ProductOrder {
 		List<OrderItem> orderItems;
 		AppUser customer;
 		
-		
-		
-		
+			
 
 		/**
 		 * Constructor
@@ -28,11 +27,22 @@ public class ProductOrder {
 		
 		public ProductOrder(LocalDate orderDateTime, List<OrderItem> orderItems, AppUser customer) {
 			
+			if (orderDateTime !=null && customer != null) {
+				setOrderDateTime(orderDateTime);
+				
+				//NULL-check for orderItems, if null initiate as new ArrayList<OrderItems>
+				if(orderItems ==null) {
+					orderItems = new ArrayList<OrderItem>();
+				}
+				
+				this.customer = customer;
+				this.id = ++_COUNTER;			
+			}
+			else {
+			throw new IllegalArgumentException("Parameters can't be null");
+			}
 			//TODO: implement ProductOrder
-			setOrderDateTime(orderDateTime);
-			this.orderItems = orderItems;
-			this.customer = customer;
-			this.id = ++_COUNTER;
+			
 		}
 	
 		
@@ -90,6 +100,19 @@ public class ProductOrder {
 			return id;
 		}
 
+		
+		
+		
+		/**************Equals & hashcode ****************************************************/
+		
+		
+		/**
+		 * Overrides: hashCode() in Object
+		 *Returns a hash code value for the object. This method is
+		 *supported for the benefit of hash tables such as those provided by HashMap. 
+		 *@return int result
+		 * */
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -100,6 +123,14 @@ public class ProductOrder {
 			result = prime * result + ((orderItems == null) ? 0 : orderItems.hashCode());
 			return result;
 		}
+		
+		/**
+		 * Overrides: equals(...) in Object
+		 * Indicates whether some other object is "equal to" this one. 
+		 * public boolean equals(Object obj)
+		*@param Object obj
+		*@return boolean
+		*/
 
 		@Override
 		public boolean equals(Object obj) {
