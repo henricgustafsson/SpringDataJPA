@@ -44,6 +44,9 @@ public class OrderItem {
 	}
 	
 	
+	
+	
+	
 	/**
 	 * Calculates the quantity multiplied by the price of the product
 	 * @RETURN Return BigDecimal 

@@ -65,6 +65,10 @@ public class ProductOrder {
 		
 		}
 		
+		
+		
+		
+		
 		/**
 		 * Method to bi-directionally remove orderItem 
 		 * @return Boolean		
@@ -108,6 +112,8 @@ public class ProductOrder {
 			}
 		}
 		
+		
+		
 		/**
 		 * Method to calculate total prize
 		 * @return BigDecimal total		
@@ -118,6 +124,10 @@ public class ProductOrder {
 			orderItems.forEach(orderItem ->total.add(orderItem.calculatePrice()));
 			return total;
 		}
+		
+		
+		
+		
 		
 		
 		/**************Getters & Setters ****************************************************/
@@ -174,6 +184,8 @@ public class ProductOrder {
 			return id;
 		}
 
+		
+		
 		
 		
 		

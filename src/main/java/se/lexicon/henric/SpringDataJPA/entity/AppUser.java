@@ -1,10 +1,18 @@
 package se.lexicon.henric.SpringDataJPA.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class AppUser {
 
 	//**************Fields ****************************************************/
+	//private static int _COUNTER =0;
 	
-	private static int _COUNTER =0;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -14,23 +22,47 @@ public class AppUser {
 		
 	/**
 	 * Constructor
+	 * @Id
 	 * @param String firstName
 	 * @param String lasttName
 	 *  @param String email
 	 * */
 	
-	public AppUser(String firstName, String lastName, String email) {
+	public AppUser(int id, String firstName, String lastName, String email) {
 		if (firstName != null && lastName !=null & email !=null) {
 			setFirstname(firstName);
 			setLastname(lastName);
 			setEmail(email);
-			id = ++_COUNTER;
+			this.id = id;
 		} 
 		else {
 		throw new IllegalArgumentException("Parameters can't be null");
 		}
 	}
+	
+	
+	/**
+	 * Constructor
+	 * @param String firstName
+	 * @param String lasttName
+	 *  @param String email
+	 * */
+	public AppUser(String firstName, String LastName, String email) {
+		this(0,firstName,LastName,email);
+	}
+	
+	/**
+	 * Default Constructor
+	 * 
+	 * */
+	public AppUser() {
+		//default constructor
+	}
 
+	
+	
+	
+	
 	
 	/**************Getters & Setters ****************************************************/
 
