@@ -61,9 +61,6 @@ public class AppUser {
 
 	
 	
-	
-	
-	
 	/**************Getters & Setters ****************************************************/
 
 	/**Getter for field String firstName

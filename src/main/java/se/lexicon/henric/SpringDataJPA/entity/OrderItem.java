@@ -2,19 +2,59 @@ package se.lexicon.henric.SpringDataJPA.entity;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
 
 public class OrderItem {
 
 	//**************Fields ****************************************************/
-	//private static int _COUNTER =0;
 	private int id;
 	private int quantity;
-	private Product product;
+	//OrderItem has an eager @ManyToOne relationship with Product
+	@ManyToOne(
+				fetch = FetchType.EAGER,
+				cascade= {
+							CascadeType.PERSIST,
+							CascadeType.MERGE,
+							CascadeType.DETACH,
+							CascadeType.REFRESH
+						}			
+			)
+	private Product product;	
+	@ManyToOne(
+			fetch = FetchType.LAZY,
+			cascade= {
+						CascadeType.PERSIST,
+						CascadeType.MERGE,
+						CascadeType.DETACH,
+						CascadeType.REFRESH
+					}			
+		)
 	private ProductOrder productOrder;
+		
 	
+	//************** Constructors ****************************************************/
 	
-	
-	
+	/**
+	 * Constructor
+	 * @param int id
+	 * @param int quantity
+	 * @param Product product
+	 * @param ProductOrder productOrder
+	 * */
+	public OrderItem(int id,int quantity, Product product, ProductOrder productOrder) {
+		if (quantity >0 && product != null && productOrder != null) {
+			setQuantity(quantity);
+			setProduct(product);
+			setProductOrder(productOrder);
+			this.id =id;
+		} 
+		else {
+		throw new IllegalArgumentException("Parameters can't be null");
+		}
+	}
 	/**
 	 * Constructor
 	 * @param int quantity
@@ -22,16 +62,8 @@ public class OrderItem {
 	 * @param ProductOrder productOrder
 	 * */
 	public OrderItem(int quantity, Product product, ProductOrder productOrder) {
-		if (quantity >0 && product != null && productOrder != null) {
-			setQuantity(quantity);
-			setProduct(product);
-			setProductOrder(productOrder);
-		} 
-		else {
-		throw new IllegalArgumentException("Parameters can't be null");
-		}
+		this(0,quantity,product,productOrder);
 	}
-	
 	
 	
 	/**
@@ -45,7 +77,7 @@ public class OrderItem {
 	
 	
 	
-	
+	/************** Methods ****************************************************/
 	
 	/**
 	 * Calculates the quantity multiplied by the price of the product

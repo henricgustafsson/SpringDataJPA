@@ -11,21 +11,32 @@ public class Product {
 	private String name;
 	private BigDecimal price;
 	
+	
+	//************** Constructors ****************************************************/
+	/**
+	 * Constructor
+	 * @param int id
+	 * @param String name
+	 * @param BigDecimal price
+	 * */
+	public Product(int id,String name, BigDecimal price) {
+		if (name !=null && price != BigDecimal.ZERO && price != null) {
+			setName(name);
+			setPrice(price);
+			this.id =id;
+		} 
+		else {
+		throw new IllegalArgumentException("Parameters can't be null");
+		}
+	}
+	
 	/**
 	 * Constructor
 	 * @param String name
 	 * @param BigDecimal price
 	 * */
 	public Product(String name, BigDecimal price) {
-		if (name !=null && price != BigDecimal.ZERO && price != null) {
-			setName(name);
-			setPrice(price);
-			//TODO: add param int id set this.id=id
-			//id = ++_COUNTER;
-		} 
-		else {
-		throw new IllegalArgumentException("Parameters can't be null");
-		}
+		this(0, name,price);
 	}
 	
 	/**

@@ -32,17 +32,17 @@ public class ProductOrder {
 	 * Set orphanremoval set to true
 	 */
 	@OneToMany(
-			fetch = FetchType.EAGER,
-			mappedBy = "productOrder",
-			cascade= {
-					CascadeType.PERSIST,
-					CascadeType.MERGE,
-					CascadeType.DETACH,
-					CascadeType.REFRESH
-			},
-			orphanRemoval = true)
-	private List<OrderItem> orderItems;
-	
+				fetch = FetchType.EAGER,
+				mappedBy = "productOrder",
+				cascade= {
+							CascadeType.PERSIST,
+							CascadeType.MERGE,
+							CascadeType.DETACH,
+							CascadeType.REFRESH
+						},
+				orphanRemoval = true
+			)
+	private List<OrderItem> orderItems;	
 	private AppUser customer;
 		
 	
@@ -100,7 +100,7 @@ public class ProductOrder {
 		
 		
 		
-		
+		/************** Methods ****************************************************/
 		
 		/**
 		 * Method to bi-directionally remove orderItem 
@@ -146,7 +146,6 @@ public class ProductOrder {
 		}
 		
 		
-		
 		/**
 		 * Method to calculate total prize
 		 * @return BigDecimal total		
@@ -158,10 +157,7 @@ public class ProductOrder {
 			return total;
 		}
 		
-		
-		
-		
-		
+				
 		
 		/**************Getters & Setters ****************************************************/
 
