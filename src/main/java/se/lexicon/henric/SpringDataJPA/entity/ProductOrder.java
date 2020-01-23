@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
@@ -46,7 +47,7 @@ public class ProductOrder {
 	@JoinColumn(name="order_item_id")
 	private List<OrderItem> orderItems;	
 	//@ManyToOne relationship with AppUser
-	@OneToMany(
+	@ManyToOne(
 			fetch = FetchType.LAZY,
 			cascade= {
 						CascadeType.PERSIST,
