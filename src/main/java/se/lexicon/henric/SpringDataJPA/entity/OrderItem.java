@@ -32,6 +32,18 @@ public class OrderItem {
 		}
 	}
 	
+	
+	
+	/**
+	 * Default Constructor
+	 * 
+	 * */
+	
+	public OrderItem() {
+		//default constructor
+	}
+	
+	
 	/**
 	 * Calculates the quantity multiplied by the price of the product
 	 * @RETURN Return BigDecimal 

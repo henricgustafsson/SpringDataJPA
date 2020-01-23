@@ -27,7 +27,13 @@ public class Product {
 		}
 	}
 	
-
+	/**
+	 * Default Constructor
+	 * 
+	 * */
+	public Product() {
+		//Default constructor
+	}
 	
 	
 	/**************Getters & Setters ****************************************************/

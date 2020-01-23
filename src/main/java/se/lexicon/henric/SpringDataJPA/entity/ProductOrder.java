@@ -54,7 +54,16 @@ public class ProductOrder {
 				this(orderDateTime, new ArrayList<OrderItem>(), customer);
 			
 		}
-	
+		
+		/**
+		 * Default Constructor
+		 * 
+		 * */
+		public ProductOrder() {
+			
+			//Default constructor
+		
+		}
 		
 		/**
 		 * Method to bi-directionally remove orderItem 
