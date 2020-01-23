@@ -37,7 +37,10 @@ public class OrderItem {
 	 * @RETURN Return BigDecimal 
 	 * */
 	public BigDecimal calculatePrice() {
-		return BigDecimal.valueOf(quantity).multiply(product.getPrice());
+		return BigDecimal
+						.valueOf(quantity).
+						multiply(product.getPrice())
+						.setScale(2);
 	}
 
 	/**************Getters & Setters ****************************************************/

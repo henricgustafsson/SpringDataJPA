@@ -1,5 +1,6 @@
 package se.lexicon.henric.SpringDataJPA.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,27 +28,87 @@ public class ProductOrder {
 		
 		public ProductOrder(LocalDate orderDateTime, List<OrderItem> orderItems, AppUser customer) {
 			
-			if (orderDateTime !=null && customer != null) {
-				setOrderDateTime(orderDateTime);
+			if (orderItems != null && orderDateTime !=null && customer != null) {
 				
-				//NULL-check for orderItems, if null initiate as new ArrayList<OrderItems>
-				if(orderItems ==null) {
-					orderItems = new ArrayList<OrderItem>();
-				}
-				
+				setOrderDateTime(orderDateTime);		
+				//Set each orderItems productOrder to this instance of productOrder				
+				orderItems.forEach(orderItem->orderItem.setProductOrder(this));
 				this.customer = customer;
 				this.id = ++_COUNTER;			
 			}
 			else {
-			throw new IllegalArgumentException("Parameters can't be null");
+				throw new IllegalArgumentException("Parameters can't be null");
 			}
-			//TODO: implement ProductOrder
+		
+			
+		}
+		
+		/**
+		 * Constructor
+		 * @param int id
+		 * @param LocalDate OrderDateTime
+		 * @param AppUser customer
+		 */
+		public ProductOrder(LocalDate orderDateTime,AppUser customer) {
+		
+				this(orderDateTime, new ArrayList<OrderItem>(), customer);
 			
 		}
 	
 		
 		/**
-		 * */
+		 * Method to bi-directionally remove orderItem 
+		 * @return Boolean		
+		 **/
+		public boolean removeOrderItem(OrderItem orderItem) {
+			
+			//NULL-check on collection OrderItems
+			if(orderItems == null) orderItems = new ArrayList<>();
+			//check if orderItem exists in List<OrderItem> orderItems
+			if(orderItems.contains(orderItem)) {
+				//remove productOrder from orderItem.productOrder
+				orderItem.setProductOrder(null);
+				//remove from collection return Boolean indicating if successful
+				return orderItems.remove(orderItem);
+			}
+			else {		
+				return false;
+			}
+		}
+		
+		
+		/**
+		 * Method to bi-directionally add orderItem 
+		 * @return Boolean		
+		 **/
+		public boolean addOrderItem(OrderItem orderItem) {
+			
+			//NULL-check on collection OrderItems
+			if(orderItems == null) orderItems = new ArrayList<>();
+			//check if orderItem exists in List<OrderItem> orderItems
+			if(!orderItems.contains(orderItem)) {
+				//add to collection
+				boolean added= orderItems.add(orderItem);
+				//add productOrder from orderItem.productOrder if item added successfully
+				if(added) orderItem.setProductOrder(this);
+				//return Boolean indicating if successful
+				return added;
+			}
+			else {		
+				return false;
+			}
+		}
+		
+		/**
+		 * Method to calculate total prize
+		 * @return BigDecimal total		
+		 **/
+		public BigDecimal calculateTotalPrice() {
+			BigDecimal total = BigDecimal.ZERO;
+			//for each item, calculate price by calling calculatePrice() and add to total
+			orderItems.forEach(orderItem ->total.add(orderItem.calculatePrice()));
+			return total;
+		}
 		
 		
 		/**************Getters & Setters ****************************************************/
