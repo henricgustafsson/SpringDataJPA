@@ -9,11 +9,11 @@ public class ProductOrder {
 	
 	
 	//**************Fields ****************************************************/
-		static int _COUNTER =0;
-		int id;
-		LocalDate OrderDateTime;
-		List<OrderItem> orderItems;
-		AppUser customer;
+	private static int _COUNTER =0;
+	private int id;
+	private LocalDate OrderDateTime;
+	private List<OrderItem> orderItems;
+	private AppUser customer;
 		
 			
 
@@ -45,6 +45,10 @@ public class ProductOrder {
 			
 		}
 	
+		
+		/**
+		 * */
+		
 		
 		/**************Getters & Setters ****************************************************/
 

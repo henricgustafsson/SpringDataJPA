@@ -6,10 +6,10 @@ public class Product {
 
 	//************** Fields ****************************************************/
 	
-	static int _COUNTER =0;
-	int id;
-	String name;
-	BigDecimal price;
+	private static int _COUNTER =0;
+	private int id;
+	private String name;
+	private BigDecimal price;
 	
 	/**
 	 * Constructor

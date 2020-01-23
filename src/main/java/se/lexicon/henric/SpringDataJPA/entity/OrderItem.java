@@ -2,14 +2,15 @@ package se.lexicon.henric.SpringDataJPA.entity;
 
 import java.math.BigDecimal;
 
+
 public class OrderItem {
 
 	//**************Fields ****************************************************/
-	static int _COUNTER =0;
-	int id;
-	int quantity;
-	Product product;
-	ProductOrder productOrder;
+	private static int _COUNTER =0;
+	private int id;
+	private int quantity;
+	private Product product;
+	private ProductOrder productOrder;
 	
 	
 	
@@ -29,6 +30,14 @@ public class OrderItem {
 		else {
 		throw new IllegalArgumentException("Parameters can't be null");
 		}
+	}
+	
+	/**
+	 * Calculates the quantity multiplied by the price of the product
+	 * @RETURN Return BigDecimal 
+	 * */
+	public BigDecimal calculatePrice() {
+		return BigDecimal.valueOf(quantity).multiply(product.getPrice());
 	}
 
 	/**************Getters & Setters ****************************************************/

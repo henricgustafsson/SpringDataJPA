@@ -4,11 +4,11 @@ public class AppUser {
 
 	//**************Fields ****************************************************/
 	
-	static int _COUNTER =0;
-	int id;
-	String firstName;
-	String lastName;
-	String email;
+	private static int _COUNTER =0;
+	private int id;
+	private String firstName;
+	private String lastName;
+	private String email;
 	
 	
 		
