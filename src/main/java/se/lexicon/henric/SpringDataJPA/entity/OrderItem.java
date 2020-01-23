@@ -34,7 +34,8 @@ public class OrderItem {
 						CascadeType.REFRESH
 					}			
 		)
-	private ProductOrder productOrder;
+	@JoinColumn(name="order_id")
+	private ProductOrder order;
 		
 	
 	//************** Constructors ****************************************************/
@@ -124,13 +125,13 @@ public class OrderItem {
 	 * @Return ProductOrder productOrder
 	 * */
 	public ProductOrder getProductOrder() {
-		return productOrder;
+		return order;
 	}
 	/**Setter for field ProductOrder productorder
 	 * @Return void
 	 * */
 	public void setProductOrder(ProductOrder productOrder) {
-		this.productOrder = productOrder;
+		this.order = productOrder;
 	}
 	
 	/**Setter for field int id
@@ -160,7 +161,7 @@ public class OrderItem {
 		int result = 1;
 		result = prime * result + orderItemId;
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((productOrder == null) ? 0 : productOrder.hashCode());
+		result = prime * result + ((order == null) ? 0 : order.hashCode());
 		result = prime * result + quantity;
 		return result;
 	}
@@ -189,10 +190,10 @@ public class OrderItem {
 				return false;
 		} else if (!product.equals(other.product))
 			return false;
-		if (productOrder == null) {
-			if (other.productOrder != null)
+		if (order == null) {
+			if (other.order != null)
 				return false;
-		} else if (!productOrder.equals(other.productOrder))
+		} else if (!order.equals(other.order))
 			return false;
 		if (quantity != other.quantity)
 			return false;
