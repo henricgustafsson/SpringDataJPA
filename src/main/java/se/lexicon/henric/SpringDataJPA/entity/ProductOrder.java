@@ -44,7 +44,7 @@ public class ProductOrder {
 						},
 				orphanRemoval = true
 			)
-	@JoinColumn(name="order_item_id")
+	//@JoinColumn(name="order_item_id")
 	private List<OrderItem> orderItems;	
 	//@ManyToOne relationship with AppUser
 	@ManyToOne(
