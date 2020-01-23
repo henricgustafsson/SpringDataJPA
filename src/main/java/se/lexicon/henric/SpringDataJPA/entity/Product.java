@@ -6,7 +6,7 @@ public class Product {
 
 	//************** Fields ****************************************************/
 	
-	private static int _COUNTER =0;
+	//private static int _COUNTER =0;
 	private int id;
 	private String name;
 	private BigDecimal price;
@@ -20,7 +20,8 @@ public class Product {
 		if (name !=null && price != BigDecimal.ZERO && price != null) {
 			setName(name);
 			setPrice(price);
-			id = ++_COUNTER;
+			//TODO: add param int id set this.id=id
+			//id = ++_COUNTER;
 		} 
 		else {
 		throw new IllegalArgumentException("Parameters can't be null");

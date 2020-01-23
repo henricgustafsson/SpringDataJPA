@@ -5,18 +5,49 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
+
+@Entity
 public class ProductOrder {
 //id, orderDateTime, some collection of OrderItem, customer (AppUser
 	
 	
 	//**************Fields ****************************************************/
-	private static int _COUNTER =0;
+	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private LocalDate OrderDateTime;
+	
+	/*ProductOrder has a @OneToMany relationship with OrderItem. 
+	 * Set orphanremoval set to true
+	 */
+	@OneToMany(
+			fetch = FetchType.EAGER,
+			mappedBy = "productOrder",
+			cascade= {
+					CascadeType.PERSIST,
+					CascadeType.MERGE,
+					CascadeType.DETACH,
+					CascadeType.REFRESH
+			},
+			orphanRemoval = true)
 	private List<OrderItem> orderItems;
+	
 	private AppUser customer;
 		
-			
+	
+	
+	//************** Constructors ****************************************************/
 
 		/**
 		 * Constructor
@@ -26,7 +57,7 @@ public class ProductOrder {
 		 * @param AppUser customer
 		 */
 		
-		public ProductOrder(LocalDate orderDateTime, List<OrderItem> orderItems, AppUser customer) {
+		public ProductOrder(int id,LocalDate orderDateTime, List<OrderItem> orderItems, AppUser customer) {
 			
 			if (orderItems != null && orderDateTime !=null && customer != null) {
 				
@@ -34,7 +65,8 @@ public class ProductOrder {
 				//Set each orderItems productOrder to this instance of productOrder				
 				orderItems.forEach(orderItem->orderItem.setProductOrder(this));
 				this.customer = customer;
-				this.id = ++_COUNTER;			
+				this.id =id;
+					
 			}
 			else {
 				throw new IllegalArgumentException("Parameters can't be null");
@@ -42,6 +74,7 @@ public class ProductOrder {
 		
 			
 		}
+		
 		
 		/**
 		 * Constructor
@@ -51,7 +84,7 @@ public class ProductOrder {
 		 */
 		public ProductOrder(LocalDate orderDateTime,AppUser customer) {
 		
-				this(orderDateTime, new ArrayList<OrderItem>(), customer);
+				this(0,orderDateTime, new ArrayList<OrderItem>(), customer);
 			
 		}
 		

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 public class OrderItem {
 
 	//**************Fields ****************************************************/
-	private static int _COUNTER =0;
+	//private static int _COUNTER =0;
 	private int id;
 	private int quantity;
 	private Product product;

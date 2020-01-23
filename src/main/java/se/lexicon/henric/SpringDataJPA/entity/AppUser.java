@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class AppUser {
 
 	//**************Fields ****************************************************/
-	//private static int _COUNTER =0;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
