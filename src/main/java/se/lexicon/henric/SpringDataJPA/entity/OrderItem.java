@@ -3,38 +3,46 @@ package se.lexicon.henric.SpringDataJPA.entity;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
-public class OrderItem {
+@Entity
+public class OrderItem implements Comparable<OrderItem> {
 
 	//**************Fields ****************************************************/
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int orderItemId;
 	private int quantity;
-	//OrderItem has an eager @ManyToOne relationship with Product
-	@ManyToOne(
-				fetch = FetchType.EAGER,
+//	a.Configure so that OrderItem has an eager @ManyToOne relationship with Product
+	@ManyToOne( fetch=FetchType.EAGER,
 				cascade= {
-							CascadeType.PERSIST,
-							CascadeType.MERGE,
-							CascadeType.DETACH,
-							CascadeType.REFRESH
-						}			
-			)
+							 CascadeType.PERSIST,
+							 CascadeType.MERGE,
+							 CascadeType.DETACH,
+							 CascadeType.REFRESH
+						 }	
+			  )
+	
 	@JoinColumn(name="product_id")
 	private Product product;	
-	@ManyToOne(
-			fetch = FetchType.LAZY,
-			cascade= {
-						CascadeType.PERSIST,
-						CascadeType.MERGE,
-						CascadeType.DETACH,
-						CascadeType.REFRESH
-					}			
-		)
-	@JoinColumn(name="product_order_id")
+//b.Configure so that OrderItem has a lazy @ManyToOne relationship with ProductOrder
+	@ManyToOne( fetch = FetchType.LAZY,
+				cascade= {
+							 CascadeType.PERSIST,
+							 CascadeType.MERGE,
+							 CascadeType.DETACH,
+							 CascadeType.REFRESH
+					    }	
+	)			
+	@JoinColumn(name="productOrderId")
 	private ProductOrder productOrder;
 		
 	
@@ -198,6 +206,20 @@ public class OrderItem {
 		if (quantity != other.quantity)
 			return false;
 		return true;
+	}
+	
+	
+	/**************CompareTo ****************************************************/
+	
+	/**
+	 * se.lexicon.henric.SpringDataJPA.entity.OrderItem.compareTo(OrderItem o)
+	 *@Override
+	*CompareTo 
+	*@param OrderItem o */
+	@Override
+	public int compareTo(OrderItem o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

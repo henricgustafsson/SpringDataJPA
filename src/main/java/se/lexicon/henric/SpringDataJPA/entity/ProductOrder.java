@@ -29,33 +29,32 @@ public class ProductOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productOrderId;
 	private LocalDate OrderDateTime;
-	
-	/*ProductOrder has a @OneToMany relationship with OrderItem. 
-	 * Set orphanremoval set to true
-	 */
+//c.Configure so that ProductOrder has a @OneToMany relationshipwith OrderItem.
+	 //  	Set orphanremoval to true.
 	@OneToMany(
-				fetch = FetchType.EAGER,
-				mappedBy = "productOrder",
-				cascade= {
-							CascadeType.PERSIST,
-							CascadeType.MERGE,
-							CascadeType.DETACH,
-							CascadeType.REFRESH
-						},
-				orphanRemoval = true
+			mappedBy = "productOrder",
+			fetch= FetchType.LAZY,
+			cascade= {
+						 CascadeType.PERSIST,
+						 CascadeType.MERGE,
+						 CascadeType.DETACH,
+						 CascadeType.REFRESH
+			    	},
+			orphanRemoval = true 			
 			)
 	private List<OrderItem> orderItems;	
 	
-	//@ManyToOne relationship with AppUser
+	//ProductOrder should also have a @ManyToOne relationship with AppUser.
 	@ManyToOne(
-			fetch = FetchType.LAZY,
-			cascade= {
-						CascadeType.PERSIST,
-						CascadeType.MERGE,
-						CascadeType.DETACH,
-						CascadeType.REFRESH
-					}			
-		)
+				 fetch=FetchType.LAZY,
+				 cascade= {
+							 CascadeType.PERSIST,
+							 CascadeType.MERGE,
+							 CascadeType.DETACH,
+							 CascadeType.REFRESH
+						 }	
+			  
+			)
 	@JoinColumn(name="user_id")
 	private AppUser customer;
 		
