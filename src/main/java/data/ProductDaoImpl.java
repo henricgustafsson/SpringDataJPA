@@ -21,6 +21,14 @@ public class ProductDaoImpl implements ProductDao {
 	@PersistenceContext
 	EntityManager entityManager;
 	
+	
+	/**
+	 * Saves a given entity.
+	 * Use the returned instance for further operations as the save operation might have changed the
+	 * entity instance completely.
+	 * Specified by: save(...) in CrudRepository
+	 * Type Parameters:<S> Parameters:entity must not be null.Returns:the saved entity; will never be null.
+	 * */
 	@Override
 	public <S extends Product> S save(S entity) {
 		
@@ -30,6 +38,13 @@ public class ProductDaoImpl implements ProductDao {
 		return entity;
 	}
 
+	/**
+	 * Saves all given entities.
+	 * Specified by: saveAll(...) in CrudRepository
+	 * Type Parameters:<S> Parameters:entities must not be null nor must it contain null.
+	 * Returns:the saved entities; will never be null.
+	 *  The returned Iterable will have the same sizeas the Iterable passed as an argument.
+	 * */
 	@Override
 	public <S extends Product> Iterable<S> saveAll(Iterable<S> entities) {
 		
@@ -43,6 +58,10 @@ public class ProductDaoImpl implements ProductDao {
 		return entities;
 	}
 
+	/**Retrieves an entity by its id.
+	 * Specified by: findById(...) in CrudRepository
+	 * Parameters:id must not be null.Returns:the entity with the given id or Optional#empty() if none found.**/
+	
 	@Override
 	public Optional<Product> findById(Integer id) {
 		
@@ -52,6 +71,10 @@ public class ProductDaoImpl implements ProductDao {
 		return result == null ? Optional.empty() : Optional.of(result);
 	}
 
+	/**Returns whether an entity with the given id exists.
+	 * Specified by: existsById(...) in CrudRepository
+	 * Parameters:id must not be null.Returns:true if an entity with the given id exists, false otherwise.
+	 **/
 	@Override
 	public boolean existsById(Integer id) {
 		
@@ -62,6 +85,10 @@ public class ProductDaoImpl implements ProductDao {
 		return (result == null);
 	}
 
+	/**Returns all instances of the type.
+	 * Specified by: findAll() in CrudRepository
+	 * Returns:all entities 
+	**/
 	@Override
 	public Iterable<Product> findAll() {
 		
@@ -73,6 +100,14 @@ public class ProductDaoImpl implements ProductDao {
 		return query.getResultList();
 	}
 
+	/**
+	 * Returns all instances of the type T with the given IDs. 
+	 * If some or all ids are not found, no entities are returned for these IDs.
+	 * Note that the order of elements in the result is not guaranteed.
+	 * Specified by: findAllById(...) in CrudRepository
+	 * Parameters:ids must not be null nor contain any null values.Returns:guaranteed to be not null.
+	 * The size can be equal or less than the number of givenids.
+	 * */
 	@Override
 	public Iterable<Product> findAllById(Iterable<Integer> ids) {
 		
@@ -93,6 +128,11 @@ public class ProductDaoImpl implements ProductDao {
 		return result;
 	}
 
+	/**
+	 * Returns the number of entities available.
+	 * Specified by: count() in CrudRepository
+	 * Returns:the number of entities.
+	 **/
 	@Override
 	public long count() {
 		
@@ -102,6 +142,10 @@ public class ProductDaoImpl implements ProductDao {
 		return query.getFirstResult();
 	}
 
+	/**Deletes the entity with the given id.
+	 * Specified by: deleteById(...) in CrudRepository
+	 * Parameters:id must not be null.
+	 **/
 	@Override
 	public void deleteById(Integer id) {
 		
@@ -119,12 +163,20 @@ public class ProductDaoImpl implements ProductDao {
 		
 	}
 
+	/**Deletes a given entity.
+	 * Specified by: delete(...) in CrudRepository
+	 * Parameters:entity must not be null.
+	 * */
 	@Override
 	public void delete(Product entity) {
 		if(entity!=null)entityManager.remove(entity);
 		
 	}
 
+	/**Deletes the given entities.
+	 * Specified by: deleteAll(...) in CrudRepository
+	 * Parameters:entities must not be null. Must not contain null elements.
+	 * */
 	@Override
 	public void deleteAll(Iterable<? extends Product> entities) {
 		entities.forEach((entity)->{
@@ -133,6 +185,10 @@ public class ProductDaoImpl implements ProductDao {
 		
 	}
 
+	/**
+	 * Deletes all entities managed by the repository.
+	 * Specified by: deleteAll() in CrudRepository
+	 * */
 	@Override
 	public void deleteAll() {
 		TypedQuery<Product> query = entityManager.createQuery("DELETE FROM product",Product.class);
@@ -140,6 +196,10 @@ public class ProductDaoImpl implements ProductDao {
 		
 	}
 
+	/**
+	 * find product by name*
+	 * @param String name
+	 * @return Product*/
 	@Override
 	public Product findByName(String name) {
 		//SELECT p FROM product p WHERE name=?1
